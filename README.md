@@ -5,4 +5,4 @@
 - Hugo Roberto
 - Igor Matheus
 - João Gabriel
-- Victor Amorim
+- Victor Amorim (Harry)
