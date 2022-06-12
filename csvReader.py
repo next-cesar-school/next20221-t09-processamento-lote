@@ -1,24 +1,23 @@
 from flask import Flask
 import pandas as pd
 import sys
+import os
 
 app = Flask(__name__)
 
 
 def main():
     if len(sys.argv) < 2:
-        print('Você não inseriu um argumento. Insira o caminho do arquivo CSV corretamente:')
-        sys.argv.insert(1, '')
-        sys.argv[1] = input()
-        while sys.argv[1] != './csv/bancoColaboradores.csv':
-            print('Argumento inválido, insira caminho do arquivo CSV corretamente.')
-            sys.argv[1] = input()
+        print('Você não inseriu um argumento. Tente novamente com o caminho de um arquivo CSV existente')
+    elif len(sys.argv) == 2:
+        arquivoCsv = sys.argv[1]
+        if not os.path.isfile(arquivoCsv):
+            print('Arquivo não encontrado, insira caminho do arquivo CSV corretamente.')
         else:
-            if sys.argv[1] == './csv/bancoColaboradores.csv':
-                df = pd.read_csv(sys.argv[1], chunksize=5)
-                for minidf in df:
-                    print(minidf)
-                    break
+            df = pd.read_csv(arquivoCsv, chunksize=5)
+            for minidf in df:
+                print(minidf)
+                break
 
 
 if __name__ == "__main__":
