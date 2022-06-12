@@ -5,10 +5,12 @@ import os
 
 app = Flask(__name__)
 
+
 def batchReading(df):
     for minidf in df:
         print(minidf)
         break
+
 
 def main():
     if len(sys.argv) < 2:
@@ -20,7 +22,6 @@ def main():
         else:
             df = pd.read_csv(arquivoCsv, chunksize=5)
             batchReading(df)
-
 
 
 if __name__ == "__main__":
