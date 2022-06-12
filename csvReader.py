@@ -5,6 +5,10 @@ import os
 
 app = Flask(__name__)
 
+def batchReading(df):
+    for minidf in df:
+        print(minidf)
+        break
 
 def main():
     if len(sys.argv) < 2:
@@ -15,9 +19,8 @@ def main():
             print('Arquivo não encontrado, insira caminho do arquivo CSV corretamente.')
         else:
             df = pd.read_csv(arquivoCsv, chunksize=5)
-            for minidf in df:
-                print(minidf)
-                break
+            batchReading(df)
+
 
 
 if __name__ == "__main__":
