@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-
+# essa função poderá ser alterada futuramente quando for usado MySql
 def batchReading(df):
     for minidf in df:
         print(minidf)
