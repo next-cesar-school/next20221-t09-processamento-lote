@@ -1,9 +1,7 @@
-from flask import Flask
 import pandas as pd
 import sys
 import os
 
-app = Flask(__name__)
 
 # essa função poderá ser alterada futuramente quando for usado MySql
 def batchReading(df):
