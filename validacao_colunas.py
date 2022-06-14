@@ -22,3 +22,4 @@ col_order = df[0:]
 df_validado = df.reindex(columns=col_order.columns, copy=False)
 
 print(df_validado)
+
