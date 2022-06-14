@@ -1,25 +1,26 @@
 # Importando o pandas
 import pandas as pd
 
-# Lendo e exibindo o arquivo csv
-df = pd.read_csv('./csv/bancoColaboradores.csv', encoding="UTF-8")
-print(df)
+#Definindo função de leitura
 
-# Definindo a ordem das colunas
+def lerArquivo(caminho):
+    #caminho = input("Insira o caminho para o arquivo: \n")
+    df = pd.read_csv(caminho, encoding="UTF-8")
+    return df
 
-# Proposta 1
-# col_order = ["data_fim", "id_usuario", "data_inicio", "hora_inicio", "hora_fim"]
+def validarColunas(df):
+    col_order = df[0:]
+    df_validado = df.reindex(columns=col_order.columns, copy=False)
+    for col1 in col_order:
+        for col2 in df_validado:
+            if col1 == col2:
+                print("Colunas válidas!")
+                return True
+            else:
+                print("Colunas inválidas!")
+                return False
 
-# Proposta 2
-col_order = df[0:]
-
-# Ajustando a ordem das colunas
-
-# Proposta 1
-# df_validado = df.reindex(columns=col_order, copy=False)
-
-# Proposta 2
-df_validado = df.reindex(columns=col_order.columns, copy=False)
-
-print(df_validado)
-
+if __name__ == "__main__":
+    caminho = "csv/bancoColaboradores.csv"
+    arquivo = lerArquivo(caminho)
+    validarColunas(arquivo)
