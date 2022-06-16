@@ -5,8 +5,9 @@ now = datetime.datetime.utcnow()
 
 # Função para inserir CSV em Banco de Dados:
 def insertDataBase(id, periodo_inicial, periodo_final, horas_trabalhadas):
+
     conexao = mysql.connector.connect(host='localhost', port="3306", database='db_projects',
-                                         user='root', password='bl12p3', auth_plugin='mysql_native_password')
+                                         user='root', password='', auth_plugin='mysql_native_password')
     try:
         if conexao.is_connected():
             cursor = conexao.cursor()
@@ -27,8 +28,9 @@ def insertDataBase(id, periodo_inicial, periodo_final, horas_trabalhadas):
 
 # Função para Listar todos os Colaboradores do Banco de Dados:
 def todosOsColaboradores(query):
+
     conexao = mysql.connector.connect(host='localhost', port="3306", database='db_projects',
-                                         user='root', password='bl12p3', auth_plugin='mysql_native_password')
+                                         user='root', password='', auth_plugin='mysql_native_password')
     cursor = conexao.cursor()
     cursor.execute(query)
     linhas = cursor.fetchall()
@@ -39,7 +41,7 @@ def todosOsColaboradores(query):
 # Função para buscar um Colaborador Específico:
 def buscarColaborador(id):
     conexao = mysql.connector.connect(host='localhost', port="3306", database='db_projects',
-                                         user='root', password='bl12p3', auth_plugin='mysql_native_password')
+                                         user='root', password='', auth_plugin='mysql_native_password')
 
     cursor = conexao.cursor()
     cursor.execute("""SELECT time_format(SEC_TO_TIME(SUM(TIME_TO_SEC(horas_trabalhadas))),'%H:%i:%S')
@@ -54,7 +56,7 @@ def buscarColaborador(id):
 # Função para exibir horas trabalhadas de um Colaborador específico do banco de dados:
 def infoColaborador(id):
     conexao = mysql.connector.connect(host='localhost', port="3306", database='db_projects',
-                                         user='root', password='bl12p3', auth_plugin='mysql_native_password')
+                                         user='root', password='', auth_plugin='mysql_native_password')
     try:
         cursor = conexao.cursor()
         cursor.execute("""SELECT time_format(SEC_TO_TIME(SUM(TIME_TO_SEC(worked_hours))),'%H:%i:%S')
