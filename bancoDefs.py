@@ -3,8 +3,8 @@ import mysql.connector
 
 # Função para inserir CSV em Banco de Dados:
 def insertDataBase(id, periodo_inicial, periodo_final, horas_trabalhadas):
-    conexao = mysql.connector.connect(host='localhost', database='mock_db',
-                                         user='admin', password='admin', auth_plugin='mysql_native_password')
+    conexao = mysql.connector.connect(host='localhost:3306', database='db_projects',
+                                      user='root', password='', auth_plugin='mysql_native_password')
     try:
         if conexao.is_connected():
             cursor = conexao.cursor()
@@ -25,8 +25,8 @@ def insertDataBase(id, periodo_inicial, periodo_final, horas_trabalhadas):
 
 # Função para Listar todos os Colaboradores do Banco de Dados:
 def todosOsColaboradores(query):
-    conexao = mysql.connector.connect(host='localhost', database='mock_db',
-                                         user='admin', password='admin', auth_plugin='mysql_native_password')
+    conexao = mysql.connector.connect(host='localhost:3306', database='db_projects',
+                                      user='root', password='', auth_plugin='mysql_native_password')
     cursor = conexao.cursor()
     cursor.execute(query)
     linhas = cursor.fetchall()

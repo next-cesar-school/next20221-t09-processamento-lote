@@ -1,13 +1,32 @@
+import pandas
 import pandas as pd
 import sys
 import os
+import bancoDefs as bd
+import validacao_colunas as vc
+import validacao_datetime as vd
 
 
-# essa função poderá ser alterada futuramente quando for usado MySql
-def batchReading(df):
-    for minidf in df:
-        print(minidf)
-        break
+def validarCsv(dataframes):
+    vc.validarColunas(dataframes)
+    periodo_inicial = dataframes[["periodo_inicial"]]
+    periodo_final = dataframes[["periodo_final"]]
+    for i in range(periodo_inicial.size):
+        vd.validarDatas(vd.formatarData(periodo_inicial.values[i]), vd.formatarData(periodo_final.values[i]))
+
+
+def conversor_df(dataframes):
+    bd.insertDataBase(dataframes.columns[0], dataframes.columns[1],
+                      dataframes.columns[2], dataframes.columns[3]
+                      )
+
+
+def batchReading(arquivocsv):
+    reader = pd.read_csv(arquivocsv, chunksize=5)
+    for dataframes in reader:
+        print(dataframes)
+        validarCsv(dataframes)
+        conversor_df(dataframes)
 
 
 def main():
@@ -18,8 +37,7 @@ def main():
         if not os.path.isfile(arquivoCsv):
             print('Arquivo não encontrado, insira caminho do arquivo CSV corretamente.')
         else:
-            df = pd.read_csv(arquivoCsv, chunksize=5)
-            batchReading(df)
+            batchReading(arquivoCsv)
 
 
 if __name__ == "__main__":
